@@ -8,7 +8,7 @@ import {HTTP_STATUS_CODES} from "../src/core/constants/http-status-codes";
 const videoCreate: VideoCreateInput = {
     title: 'new video',
     author: 'some author',
-    availableResolution: [AvailableResolutions.P144]
+    availableResolutions: [AvailableResolutions.P144]
 }
 
 // jest.useFakeTimers({legacyFakeTimers:true})
@@ -37,6 +37,16 @@ describe('/videos', () => {
         const all = await getAll()
         expect(all.status).toBe(HTTP_STATUS_CODES.OK_200)
         expect(all.body.length).toBe(1)
+    })
+    it('post with incorrect title', async () => {
+        const resp = await request(app).post("/videos").send({...videoCreate, title:null})
+
+
+        expect(resp.status).toBe(HTTP_STATUS_CODES.CLIENT_ERROR_400)
+        expect(resp.body).toStrictEqual({errorMessages:[{
+                field:'title',
+                message:'Incorrect value'
+            }]})
     })
 
 })

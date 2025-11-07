@@ -4,5 +4,5 @@ export type ErrorField = {
 }
 
 export type ErrorResponse = {
-    errorMessages: ErrorField[];
+    errorsMessages: ErrorField[];
 }

@@ -84,7 +84,7 @@ videosRouter
             res.sendStatus(HTTP_STATUS_CODES.NOT_FOUND_404);
             return;
         }
-        DB.videos.filter(video => video.id !== +req.params.id)
+        DB.videos = DB.videos.filter(video => video.id !== +req.params.id)
         res.sendStatus(HTTP_STATUS_CODES.NO_CONTENT_204);
     })
 
