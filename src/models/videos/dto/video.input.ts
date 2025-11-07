@@ -25,4 +25,5 @@ export type VideoCreateInput = {
 export type VideoUpdateInput = VideoCreateInput & {
     canBeDownloaded: boolean
     minAgeRestriction: number
+    publicationDate: string
 }
