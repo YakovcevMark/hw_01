@@ -5,8 +5,8 @@ import {validateVideoCreation} from "./video.create.validation";
 const errorMessage = 'Incorrect value'
 
 export const validateVideoUpdating = (body: Partial<VideoUpdateInput>): ErrorField[] => {
-    const {title, author, availableResolution, minAgeRestriction, canBeDownloaded} = body
-    const errors: ErrorField[] = validateVideoCreation({title, author, availableResolution});
+    const {title, author, availableResolutions, minAgeRestriction, canBeDownloaded} = body
+    const errors: ErrorField[] = validateVideoCreation({title, author, availableResolutions});
 
     if (
         minAgeRestriction && (

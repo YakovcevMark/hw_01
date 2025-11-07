@@ -4,7 +4,7 @@ import {AvailableResolutions} from "../types";
 
 const errorMessage = 'Incorrect value'
 export const validateVideoCreation = (body: Partial<VideoCreateInput>): ErrorField[] => {
-    const {title, author, availableResolution} = body
+    const {title, author, availableResolutions } = body
     const errors: ErrorField[] = [];
 
     if (
@@ -30,12 +30,12 @@ export const validateVideoCreation = (body: Partial<VideoCreateInput>): ErrorFie
     const availableResolutionsValues = Object.values(AvailableResolutions);
 
     if (
-        !Array.isArray(availableResolution) ||
-        availableResolution.length < 1 ||
-        availableResolution.length > availableResolutionsValues.length ||
-        availableResolution.some(r => !availableResolutionsValues.includes(r))
+        !Array.isArray(availableResolutions) ||
+        availableResolutions.length < 1 ||
+        availableResolutions.length > availableResolutionsValues.length ||
+        availableResolutions.some(r => !availableResolutionsValues.includes(r))
     ) {
-        errors.push({field: 'availableResolution', message: errorMessage});
+        errors.push({field: 'availableResolutions', message: errorMessage});
     }
 
 

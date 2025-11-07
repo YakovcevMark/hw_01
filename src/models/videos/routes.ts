@@ -14,6 +14,7 @@ const videosRouter = Router();
 videosRouter
 
     .get("/", (req, res) => {
+        console.log(DB.videos)
         res.status(HTTP_STATUS_CODES.OK_200).send(DB.videos);
     })
 
@@ -35,7 +36,7 @@ videosRouter
         }
 
         const todayDate = new Date()
-        const tomorrowDate = todayDate.setDate(todayDate.getDate() + 1)
+        const tomorrowDate = new Date(new Date().setDate(todayDate.getDate() + 1))
 
         const newVideo: Video = {
             id: DB.videos.length ? DB.videos[DB.videos.length - 1].id + 1 : 1,
@@ -44,11 +45,11 @@ videosRouter
             availableResolutions: req.body.availableResolutions,
             canBeDownloaded: false,
             createdAt: todayDate.toISOString(),
-            publicationDate: new Date(tomorrowDate).toISOString(),
+            publicationDate: tomorrowDate.toISOString(),
             minAgeRestriction: null
         }
         DB.videos.push(newVideo)
-        res.status(HTTP_STATUS_CODES.OK_200).send(newVideo)
+        res.status(HTTP_STATUS_CODES.CREATED_201).send(newVideo)
     })
 
     .put("/:id", (req: Request<RequestEntityId, VideoUpdateInput>, res:Response) => {
